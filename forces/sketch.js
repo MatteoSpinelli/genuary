@@ -85,18 +85,6 @@ class Liquid {
   }
 
   contains(obj) {
-    /* let vertex0 = createVector(this.x, this.y)
-    let vertex1 = createVector(this.x + this.w, this.y)
-    let vertex2 = createVector(this.x + this.w, this.y + this.h)
-    let vertex3 = createVector(this.x, this.y + this.h)
-    let vertices = [vertex0, vertex1, vertex2, vertex3]
-    let diag = sqrt(this.w ** 2 + this.h ** 2)
-    for (let vertex of vertices) {
-      let distancefromvertex = sqrt((obj.position.x - vertex.x) ** 2 + (obj.position.y - vertex.y) ** 2)
-      if (distancefromvertex > diag) {
-        return false
-      }
-    } */
     let pos = obj.position
     return (this.x < pos.x && this.x + this.w > pos.x) && (this.y < pos.y && this.y + this.h > pos.y)
   }
