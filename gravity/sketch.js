@@ -3,12 +3,14 @@ class Mover {
   velocity
   acceleration
   mass
+  hash
 
   constructor(mass, x = width / 2, y = height / 2) {
     this.position = createVector(x, y)
     this.velocity = createVector()
     this.acceleration = createVector()
     this.mass = mass
+    this.hash = random()
   }
 
   applyForce(force) {
@@ -95,17 +97,17 @@ let liquids = []
 
 function setup() {
   createCanvas(600, 600);
-  for (i = 0; i < 1; i++) {
-    movers.push(new Mover(30, random(100, width - 100), random(100, height - 100)))
-  }
-  for (i = 0; i < 1; i++) {
+  movers.push(new Mover(30, 320, 320))
+  movers.push(new Mover(30, 320, 200))
+  movers[0].velocity = createVector(2, 0);
+  movers[1].velocity = createVector(-2, 0);
+  for (i = 0; i < 0; i++) {
     liquids.push(new Liquid(300, 300, 100, 100, 1))
   }
 }
 
 function draw() {
-  background(0);
-  let gravity = createVector(0, 0.1)
+  background(0)
   for (let liquid of liquids) {
     liquid.show()
   }
@@ -113,7 +115,19 @@ function draw() {
 
     // gravity
 
-    mover.applyForce(p5.Vector.mult(gravity, mover.mass))
+    for (let attractor of movers) {
+      if (attractor.hash === mover.hash) {
+        continue
+      }
+      const G = -1
+      let distanceVector = p5.Vector.sub(mover.position, attractor.position)
+      let mag = constrain(distanceVector.mag(), 5, 25)
+      let force = (G * (attractor.mass * mover.mass)) / mag ** 2
+      distanceVector.setMag(force)
+      mover.applyForce(distanceVector)
+      distanceVector.mult(-1)
+      attractor.applyForce(distanceVector)
+    }
 
     // friction
 
