@@ -9,7 +9,7 @@ function create2DVector(numRows, numCols) {
   return arr
 }
 
-let w = 2
+let w = 1
 let sandbox
 let numRows
 let numCols
