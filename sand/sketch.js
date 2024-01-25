@@ -48,9 +48,9 @@ function draw() {
 
 
   let newSandobox = create2DVector(numRows, numCols)
-  for (let i = 0; i < sandbox.length; i++) {
+  for (let i = sandbox.length - 1; i >= 0; i--) {
 
-    for (let j = 0; j < sandbox[i].length; j++) {
+    for (let j = sandbox[i].length - 1; j >= 0 ; j--) {
 
       let square = sandbox[i][j]
       if (square == 0) {
