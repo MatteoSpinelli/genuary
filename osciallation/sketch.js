@@ -2,15 +2,37 @@ function setup() {
   createCanvas(600, 600);
 }
 
-let t = 0
+let angle = 0
+
+let angularVelocity = 0
+
+let angularAcc = 0.01
+
+const DRAG = 0.1
+
 
 function draw() {
-  background(220);
-  translate(300, 300)
-  let posx = cos((100 + t)) * 141
-  let posy = sin((100 + t)) * 141
-  translate(cos((100 + t)) * 141, sin((100 + t)) * 141)
-  circle(-posx, posy, 30)
-  circle(posx, -posy, 30)
-  t += 0.01
+  background(255)
+  
+  translate(width / 2, height / 2);
+  rotate(angle);
+
+  stroke(0);
+  fill(127);
+  
+  line(-60, 0, 60, 0);
+  circle(60, 0, 16);
+  circle(-60, 0, 16);
+
+  angularVelocity += angularAcc
+
+  // add drag
+
+  let dragForce = DRAG * (angularVelocity ** 2)
+  angularVelocity -= dragForce
+  console.log(angularVelocity)
+
+  angle += angularVelocity
+
+
 }
