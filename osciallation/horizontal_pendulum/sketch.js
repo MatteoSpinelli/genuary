@@ -14,7 +14,5 @@ function draw() {
   stroke(0)
   fill(127)
   circle(x, 0, 20)
-  circle(x1, 0, 20)
   line(0, 0, x, 0)
-  line(x1, 0, x, 0)
 }
